@@ -4,7 +4,10 @@ type Props = {};
 
 export default function CommandCenter({}: Props) {
   return (
-    <button className="bg-zinc-100 p-3 rounded-lg border">
+    <button
+      className="bg-zinc-100 p-3 rounded-lg border"
+      name="activate-command"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
