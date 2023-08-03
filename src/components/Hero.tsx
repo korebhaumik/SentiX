@@ -1,11 +1,16 @@
 import React from "react";
+import Link from "next/link";
 
 type Props = {};
 
 export default function Hero({}: Props) {
   return (
-    <main className=" max-w-4xl mx-auto pt-40">
-      <button className="flex items-center w-48 justify-between py-3 mx-auto shadow-md px-5 border-2 border-zinc-200 rounded-full">
+    <main className=" max-w-4xl mx-auto pt-32 sm:pt-32">
+      <Link
+        href="https://github.com/korebhaumik/SentiX"
+        target="_blank"
+        className="flex items-center w-48 justify-between py-3 mx-auto shadow-md px-5 border-2 border-zinc-200 rounded-full"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
@@ -20,12 +25,14 @@ export default function Hero({}: Props) {
           />
         </svg>
         <span>Star on GitHub</span>
-      </button>
+      </Link>
 
-      <h1 className="text-4xl md:text-5xl font-semibold md:leading-[60px] tracking-wide text-center max-w-3xl mx-auto mt-3">
+      <h1 className="text-3xl md:text-5xl font-semibold md:leading-[60px] tracking-wide text-center max-w-3xl mx-auto mt-3">
         Generate Sentimental Analysis for anything Twitter in seconds...
       </h1>
-      <h2 className="text-zinc-600 mx-auto w-fit text-sm font-medium mt-3">500 tweets analysed so far</h2>
+      <h2 className="text-zinc-600 mx-auto w-fit text-sm font-medium mt-3">
+        500 tweets analysed so far
+      </h2>
     </main>
   );
 }
