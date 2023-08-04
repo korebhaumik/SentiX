@@ -37,6 +37,7 @@ export async function POST(req: Request) {
     openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY as string,
     modelName: "gpt-3.5-turbo",
     streaming: true,
+    maxTokens: 1024,
   });
 
   const retriever = vectorStore.asRetriever(10, {
