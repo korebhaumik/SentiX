@@ -27,7 +27,7 @@ export const AiContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [api, setApi] = useState<string>("/api/ai");
+  const [api, setApi] = useState<string>("/api/tweet");
   const { append, messages, isLoading, setMessages } = useChat({
     // api: "/api/tweet",
     // api: "/api/handle",

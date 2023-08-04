@@ -15,7 +15,7 @@ export default function Input({ activeTab }: Props) {
   const [hashtag, setHashtag] = useState<string>("");
   const { append, isLoading } = useAi();
   const handleSumbitTweet = async () => {
-    if (!tweet) return;
+    if (tweet == "") return;
     setTemp("");
     await append({
       content: tweet,
@@ -63,6 +63,13 @@ export default function Input({ activeTab }: Props) {
             }}
             className="w-full p-3 mt-3 h-[6.25rem] outline-black rounded-lg resize-none border-2 border-zinc-200"
             placeholder="e.g. Yes, we know. Everyone likes coffee. You’re probably not even a “real writer” if you don’t have coffee siphoned down your throat as a form of alarm clock."
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                if (e.shiftKey) return;
+                e.preventDefault();
+                handleSumbitTweet();
+              }
+            }}
           />
           <button
             onClick={handleSumbitTweet}
@@ -71,7 +78,7 @@ export default function Input({ activeTab }: Props) {
               "bg-black/50": isLoading,
             })}
           >
-            {!isLoading ? "Generate Analysis" : "loading"}
+            {!isLoading ? "Generate Analysis" : "Generating..."}
           </button>
         </section>
       )}
@@ -98,6 +105,11 @@ export default function Input({ activeTab }: Props) {
             }}
             className="w-full p-3 mt-3 focus:outline-black focus:outline-2 focus:-outline-offset-2 -outline-offset-1 rounded-lg outline outline-zinc-300 border-zinc-200"
             placeholder="e.g. JohnDoe"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSumbitHandle();
+              }
+            }}
           />
           <button
             disabled={isLoading}
@@ -106,7 +118,7 @@ export default function Input({ activeTab }: Props) {
               "bg-black/50": isLoading,
             })}
           >
-            {!isLoading ? "Generate Analysis" : "loading"}
+            {!isLoading ? "Generate Analysis" : "Generating..."}
           </button>
         </section>
       )}
@@ -133,12 +145,20 @@ export default function Input({ activeTab }: Props) {
             }}
             className="w-full p-3 mt-3 focus:outline-black focus:outline-2 focus:-outline-offset-2 -outline-offset-1 rounded-lg outline outline-zinc-300 border-zinc-200"
             placeholder="e.g. #CancelTwitter"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSumbitHashtag();
+              }
+            }}
           />
           <button
+            disabled={isLoading}
             onClick={handleSumbitHashtag}
-            className="w-full mt-2 bg-black text-white py-4 rounded-lg"
+            className={cn("w-full mt-2 bg-black text-white py-4 rounded-lg", {
+              "bg-black/50": isLoading,
+            })}
           >
-            Generate Analysis
+            {!isLoading ? "Generate Analysis" : "Generating..."}
           </button>
         </section>
       )}

@@ -47,7 +47,7 @@ export default function AnimatedTabs({ activeTab, setActiveTab }: Props) {
           {activeTab === tab.id && (
             <motion.span
               layoutId="underline"
-              className="absolute inset-0 z-10 bg-black/10  border-black"
+              className="absolute inset-0 z-0 bg-black/10  border-black "
               style={{ borderRadius: 6 }}
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />
