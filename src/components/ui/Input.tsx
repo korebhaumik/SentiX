@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Note from "./Note";
-import { useChat } from "ai/react";
 import { useAi } from "@/context/Ai.context";
 import cn from "@/lib/utils";
 
@@ -10,12 +9,32 @@ type Props = {
 };
 
 export default function Input({ activeTab }: Props) {
+  const [temp, setTemp] = useState<string>("");
   const [tweet, setTweet] = useState<string>("");
+  const [handle, setHandle] = useState<string>("");
+  const [hashtag, setHashtag] = useState<string>("");
   const { append, isLoading } = useAi();
-  const handleSumbit = async () => {
+  const handleSumbitTweet = async () => {
     if (!tweet) return;
+    setTemp("");
     await append({
       content: tweet,
+      role: "user",
+    });
+  };
+  const handleSumbitHashtag = async () => {
+    if (!hashtag) return;
+    setTemp("");
+    await append({
+      content: hashtag,
+      role: "user",
+    });
+  };
+  const handleSumbitHandle = async () => {
+    if (!handle) return;
+    setTemp("");
+    await append({
+      content: handle,
       role: "user",
     });
   };
@@ -37,15 +56,19 @@ export default function Input({ activeTab }: Props) {
             </span>
           </p>
           <textarea
-            onChange={(e) => setTweet(e.target.value)}
+            value={temp}
+            onChange={(e) => {
+              setTemp(e.target.value);
+              setTweet(e.target.value);
+            }}
             className="w-full p-3 mt-3 h-[6.25rem] outline-black rounded-lg resize-none border-2 border-zinc-200"
             placeholder="e.g. Yes, we know. Everyone likes coffee. You’re probably not even a “real writer” if you don’t have coffee siphoned down your throat as a form of alarm clock."
           />
           <button
-            onClick={handleSumbit}
+            onClick={handleSumbitTweet}
             disabled={isLoading}
-            className={cn("w-full mt-2 bg-black text-white py-4 rounded-lg",{
-                "bg-black/50": isLoading,
+            className={cn("w-full mt-2 bg-black text-white py-4 rounded-lg", {
+              "bg-black/50": isLoading,
             })}
           >
             {!isLoading ? "Generate Analysis" : "loading"}
@@ -68,11 +91,22 @@ export default function Input({ activeTab }: Props) {
             </span>
           </p>
           <input
+            value={temp}
+            onChange={(e) => {
+              setTemp(e.target.value);
+              setHandle(e.target.value);
+            }}
             className="w-full p-3 mt-3 focus:outline-black focus:outline-2 focus:-outline-offset-2 -outline-offset-1 rounded-lg outline outline-zinc-300 border-zinc-200"
             placeholder="e.g. JohnDoe"
           />
-          <button className="w-full mt-2 bg-black text-white py-4 rounded-lg">
-            Generate Analysis
+          <button
+            disabled={isLoading}
+            onClick={handleSumbitHandle}
+            className={cn("w-full mt-2 bg-black text-white py-4 rounded-lg", {
+              "bg-black/50": isLoading,
+            })}
+          >
+            {!isLoading ? "Generate Analysis" : "loading"}
           </button>
         </section>
       )}
@@ -92,10 +126,18 @@ export default function Input({ activeTab }: Props) {
             </span>
           </p>
           <input
+            value={temp}
+            onChange={(e) => {
+              setTemp(e.target.value);
+              setHashtag(e.target.value);
+            }}
             className="w-full p-3 mt-3 focus:outline-black focus:outline-2 focus:-outline-offset-2 -outline-offset-1 rounded-lg outline outline-zinc-300 border-zinc-200"
             placeholder="e.g. #CancelTwitter"
           />
-          <button className="w-full mt-2 bg-black text-white py-4 rounded-lg">
+          <button
+            onClick={handleSumbitHashtag}
+            className="w-full mt-2 bg-black text-white py-4 rounded-lg"
+          >
             Generate Analysis
           </button>
         </section>

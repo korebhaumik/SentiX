@@ -17,7 +17,7 @@ export default function Result({}: Props) {
         if (index !== messages.length - 1) return;
         return (
           <div className="" key={Math.random()}>
-            <p className="text-gray-700">{message.content}</p>
+            <p className="text-gray-700 whitespace-pre-wrap">{message.content}</p>
           </div>
         );
       })}

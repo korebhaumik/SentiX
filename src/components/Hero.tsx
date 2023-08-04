@@ -27,7 +27,7 @@ export default function Hero({}: Props) {
         <span>Star on GitHub</span>
       </Link>
 
-      <h1 className="text-3xl md:text-5xl font-semibold md:leading-[60px] tracking-wide text-center max-w-3xl mx-auto mt-3">
+      <h1 className="text-3xl md:text-5xl font-semibold md:leading-[56px] tracking-wide text-center max-w-3xl mx-auto mt-3">
         Generate Sentimental Analysis for anything Twitter in seconds...
       </h1>
       <h2 className="text-zinc-600 mx-auto w-fit text-sm font-medium mt-3">
