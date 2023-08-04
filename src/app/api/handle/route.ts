@@ -1,15 +1,10 @@
 import { StreamingTextResponse, LangChainStream } from "ai";
-import {} from "openai-edge";
-import { OpenAIChat } from "langchain/llms/openai";
-import { PromptTemplate } from "langchain/prompts";
 import { PineconeClient } from "@pinecone-database/pinecone";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
 import { Message } from "ai";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RetrievalQAChain } from "langchain/chains";
-
-export const runtime = "edge";
 
 export async function POST(req: Request) {
   //   const { tweet } = await req.json();
@@ -19,7 +14,10 @@ export async function POST(req: Request) {
   console.log("handle", handle);
   const { stream, handlers } = LangChainStream();
 
-  if(handle !== "scotthamilton") return new Response(`Regrettably, due to the constraints imposed by the new Twitter policy, my access to user handles is restricted.\nKindly attempt your request again using the user handles outlined in the Readme.md.`);
+  if (handle !== "scotthamilton")
+    return new Response(
+      `Regrettably, due to the constraints imposed by the new Twitter policy, my access to user handles is restricted.\nKindly attempt your request again using the user handles outlined in the Readme.md.`
+    );
 
   const client = new PineconeClient();
   await client.init({
