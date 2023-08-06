@@ -1,34 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a href="https://sentix.vercel.app/">
+    <h1>Senti𝕏</h1>
+</a>
+<p >
+  SentiX is a sentiment analysis tool for twitter.
+</p>
+<p >
+  <a href="#description"><strong>Description</strong></a> ·
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#running-locally"><strong>Running locally</strong></a> ·
+</p>
+<!-- <br/> -->
 
-## Getting Started
+## Description
 
-First, run the development server:
+<h3>AI Amplify Winning Project (Problem Statement Two )</h3>
 
+Utilizing state-of-the-art natural language processing algorithms, Senti𝕏 analyzes tweets, user handles, and hashtags, extracting nuanced sentiments in real-time. Uncover valuable trends, gauge public perception, and make data-driven decisions with our comprehensive sentiment analysis toolkit, designed to unravel the emotions behind every digital conversation.
+
+**Link:** [https://sentix.vercel.app/](https://sentix.vercel.app/)
+
+
+## Features
+
+- [Next.js](https://nextjs.org/) App Router
+- React and [Typescript](https://www.typescriptlang.org/) for reliable and fast development
+- [Langchain.js](https://docs.langchain.com/docs/) as the wrapper to interact with OpenAI API
+- [Pinecone](https://www.pinecone.io/) as the vector database
+- User Interface and Experience
+  - Design is built from scratch using [Figma](https://www.figma.com/)
+  - Styling with [Tailwind CSS](https://tailwindcss.com)
+  - Icons from [Heroicons](https://heroicons.com) and [Google Icons](https://fonts.google.com/icons)
+  - Tailwind Merge and CLSX for dev experience
+
+## Running locally
+
+You will need to have the necessary environment variables setup in your `.env` file.
+This should include keys for your openai account, pinecone index. 
+    
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+NEXT_PUBLIC_OPENAI_API_KEY = 
+NEXT_PUBLIC_PINECONE_API_KEY = 
+NEXT_PUBLIC_PINECONE_ENV = 
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Note: You should not commit your `.env` file or it will expose secrets that will allow others to access your openai credits.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Install run: `pnpm i`
+2. Make a new `.env` file.
+3. Populate the `.env` file with the necessary environment variables.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+pnpm run dev
+```
 
-## Learn More
+Your app template should now be running on [localhost:3000](http://localhost:3000/).
 
-To learn more about Next.js, take a look at the following resources:
+## Running locally with docker
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker login
+docker pull korebhaumik/sentix
+docker run -env-file .env -p 3000:3000 korebhaumik/sentix
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> Note: If the docker image is not available (repo is private), you can build it locally by running `docker build -t sentix.` in the root directory of the project.
