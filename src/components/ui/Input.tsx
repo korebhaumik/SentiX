@@ -32,9 +32,13 @@ export default function Input({ activeTab }: Props) {
   };
   const handleSumbitHandle = async () => {
     if (!handle) return;
+    let tweetsRes = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}${handle}`
+    );
+    let tweets: string[] = await tweetsRes.json();
     setTemp("");
     await append({
-      content: handle,
+      content: JSON.stringify({ handle, tweets: tweets.slice(0,10) }),
       role: "user",
     });
   };
@@ -86,7 +90,7 @@ export default function Input({ activeTab }: Props) {
       {activeTab === "handle" && (
         <section className="my-5">
           <Note
-            message="Due to unavaibility of the twitter api for 3rd party apps we are only able to analyse selected user handles."
+            message="Due to unavaibility of the twitter api for 3rd party apps we are only able to analyse selected popular user handles."
             type="warning"
           />
           <p className="flex items-center">
@@ -126,7 +130,7 @@ export default function Input({ activeTab }: Props) {
       {activeTab === "hashtag" && (
         <section className="my-5">
           <Note
-            message="Due to unavaibility of the twitter api for 3rd party apps we are only able to analyse selected user hashtags."
+            message="Due to unavaibility of the twitter api for 3rd party apps we are only able to analyse selected popular hashtags."
             type="warning"
           />
           <p className="flex items-center">
