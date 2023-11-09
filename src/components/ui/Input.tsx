@@ -33,7 +33,7 @@ export default function Input({ activeTab }: Props) {
   const handleSumbitHandle = async () => {
     if (!handle) return;
     let tweetsRes = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}${handle}`
+      `https://v6c7kghg77.execute-api.ap-south-1.amazonaws.com:6565/getUserTweets?username=${handle}`
     );
     let tweets: string[] = await tweetsRes.json();
     setTemp("");
